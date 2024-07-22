@@ -12,8 +12,8 @@ class Topic(models.Model):
 
 
 class Room(models.Model):
-    # host =
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL)
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null= True)
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null= True)
     name = models.CharField(max_length=120)
     description = models.TextField(null=True, blank= True)
     # participants =
