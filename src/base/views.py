@@ -20,7 +20,8 @@ def room(request, pk):
     return render(request, 'base/room.html', context)
 
 def createRoom(request):
-    form = RoomForm
+    form = RoomForm()
+    
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
