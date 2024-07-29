@@ -29,14 +29,14 @@ def loginPage(request):
             login(request, user)
             return redirect ('home')
         else:
-            messages.error(request, "User doesn't exist")
+            messages.error(request, "User does not exist")
 
 
     context = {}
     return render(request, 'base/login_register.html', context)
 
 
-def logoutPage(request):
+def logoutUser(request):
     logout(request)
 
     return redirect('home')
