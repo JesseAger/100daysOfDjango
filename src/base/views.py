@@ -38,7 +38,6 @@ def loginPage(request):
         else:
             messages.error(request, "User does not exist")
 
-
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
 
@@ -91,11 +90,13 @@ def createRoom(request):
 
     if request.method == 'POST':
         form = RoomForm(request.POST)
-        # if request.user != room.host:
-        #     return HttpResponse("You don't have permissions to complete your action")
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+        for room in Room.objects.all():
+
+            if request.user != room.host:
+                return HttpResponse("You don't have permissions to complete your action")
+            if form.is_valid():
+                form.save()
+                return redirect('home')
 
     context = {'form': form}
     return render(request, 'base/room_form.html', context)
