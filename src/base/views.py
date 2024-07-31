@@ -22,13 +22,14 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
             user = User.objects.get(username=username)
-        except:
+        except User.DoesNotExist:
             messages.error(request, 'User does not exist')
+            return render(request, 'base/login_register.html', context)
 
         user = authenticate(request, username=username, password=password)
 
@@ -37,7 +38,6 @@ def loginPage(request):
             return redirect ('home')
         else:
             messages.error(request, "User does not exist")
-
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
@@ -50,7 +50,6 @@ def logoutUser(request):
 
 def registerPage(request):
     form = UserCreationForm()
-    context = {'form': form}
 
     if request.method == 'POST':
         form= UserCreationForm(request.POST)
@@ -58,12 +57,14 @@ def registerPage(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
             login(request, user)
             return redirect('home')
 
         else:
-            messages.error(request, 'An error Occurred Try Again Later')
-    return render(request, 'base/login_register.html', context)
+            messages.error(request, 'An error Occurred Try Again!')
+    return render(request, 'base/login_register.html', {'form':form})
 
 
 def home(request):
@@ -87,10 +88,11 @@ def room(request, pk):
 @login_required(login_url='login')
 def createRoom(request):
     form = RoomForm()
-    if request.user != room.host:
-        return HttpResponse("You don't have permissions to complete your action")
+
     if request.method == 'POST':
         form = RoomForm(request.POST)
+        if request.user != room.host:
+            return HttpResponse("You don't have permissions to complete your action")
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -103,11 +105,10 @@ def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
 
-    if request.user != room.host:
-        return HttpResponse("You don't have permissions to complete your action")
-
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
+        if request.user != room.host:
+            return HttpResponse("You don't have permissions to complete your action")
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -118,10 +119,10 @@ def updateRoom(request, pk):
 @login_required(login_url='login')
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
-    if request.user != room.host:
-        return HttpResponse("You don't have permissions to complete your action")
 
     if request.method == 'POST':
         room.delete()
+        if request.user != room.host:
+            return HttpResponse("You don't have permissions to complete your action")
         return redirect('home')
     return render(request, 'base/delete.html', {'obj':room})
