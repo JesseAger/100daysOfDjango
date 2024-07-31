@@ -15,6 +15,10 @@ from django.http import HttpResponse
 # ]
 
 def loginPage(request):
+    page = 'login'
+
+    if request.user.is_authenticated:
+        return redirect('home')
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -34,7 +38,7 @@ def loginPage(request):
             messages.error(request, "User does not exist")
 
 
-    context = {}
+    context = {'page': page}
     return render(request, 'base/login_register.html', context)
 
 
@@ -42,6 +46,11 @@ def logoutUser(request):
     logout(request)
 
     return redirect('home')
+
+def registerPage(request):
+    page = 'register'
+
+    return render(request, 'base/login_register.html')
 
 
 def home(request):
