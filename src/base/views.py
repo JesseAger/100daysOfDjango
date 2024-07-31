@@ -60,7 +60,9 @@ def registerPage(request):
             user.save()
             login(request, user)
             return redirect('home')
-        
+
+        else:
+            messages.error(request, 'An error Occurred Try Again Later')
     return render(request, 'base/login_register.html', context)
 
 
