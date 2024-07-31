@@ -7,6 +7,7 @@ from .models import Room, Topic
 from .forms import RoomForm
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 # rooms = [
 #     {'id':1, 'name': "Let's learn Python"},
@@ -48,9 +49,10 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    page = 'register'
+    form = UserCreationForm()
+    context = {'form': form}
 
-    return render(request, 'base/login_register.html')
+    return render(request, 'base/login_register.html', context)
 
 
 def home(request):
