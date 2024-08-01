@@ -42,13 +42,11 @@ from django.views.decorators.csrf import csrf_protect
 def loginPage(request):
     page = 'login'
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username, password)
+        profile = {'username': request.POST.get('username'), 'password':request.POST.get('password')}
         
+        user = authenticate(request, profile)
         login(request, user)
-        messages.success(request, 'Logged in successfully')
+        # messages.success(request, 'Logged in successfully')
         return redirect('home')
     else:
         messages.error(request, 'Logged in Fail')
