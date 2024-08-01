@@ -16,27 +16,30 @@ from django.views.decorators.csrf import csrf_protect
 #     {'id':3, 'name': "Frontend Developers"},
 # ]
 
-# def loginPage(request):
-#     page = 'login'
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
+def loginPage(request):
+    page = 'login'
 
-#         user = authenticate(request, username=username, password=password)
-#         user is not None
+    if request.user.is_authenticated:
+        return redirect('home')
 
-#     if request.user.is_authenticated:
-#         return redirect('home')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username= username)
+        except:
+            messages.error(request, 'User does not exist')
 
+        user = authenticate(request, username=username, password=password)
 
-#     #     if user is not None:
-#     #         login(request, user)
-#     #         return redirect ('home')
-#     #     else:
-#     #         messages.error(request, "User does not exist")
+        if user is not None:
+            login(request, user)
+            return redirect ('home')
+        else:
+            messages.error(request, "User does not exist")
 
-#     context = {'page': page}
-#     return render(request, 'base/login_register.html', context)
+    context = {'page': page}
+    return render(request, 'base/login_register.html', context)
 
 @csrf_protect
 def loginPage(request):
