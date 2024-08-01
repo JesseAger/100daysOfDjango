@@ -8,6 +8,7 @@ from .forms import RoomForm
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
+from django.views.decorators.csrf import csrf_protect
 
 # rooms = [
 #     {'id':1, 'name': "Let's learn Python"},
@@ -15,25 +16,42 @@ from django.contrib.auth.forms import UserCreationForm
 #     {'id':3, 'name': "Frontend Developers"},
 # ]
 
+# def loginPage(request):
+#     page = 'login'
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+
+#         user = authenticate(request, username=username, password=password)
+#         user is not None
+
+#     if request.user.is_authenticated:
+#         return redirect('home')
+
+
+#     #     if user is not None:
+#     #         login(request, user)
+#     #         return redirect ('home')
+#     #     else:
+#     #         messages.error(request, "User does not exist")
+
+#     context = {'page': page}
+#     return render(request, 'base/login_register.html', context)
+
+@csrf_protect
 def loginPage(request):
     page = 'login'
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        user is not None
-
-    if request.user.is_authenticated:
+        user = authenticate(request, username, password)
+        
+        login(request, user)
+        messages.success(request, 'Logged in successfully')
         return redirect('home')
-
-
-    #     if user is not None:
-    #         login(request, user)
-    #         return redirect ('home')
-    #     else:
-    #         messages.error(request, "User does not exist")
-
+    else:
+        messages.error(request, 'Logged in Fail')
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
 
