@@ -15,11 +15,24 @@
 
         <div>
             <small> @{{message.user}} {{message.created|timesince}} ago</small>
+            <p>{{ message.body }}</p>
+
+            <hr>
         </div>
 
     {% endfor %}
 
 
 </div>
+{% if request.user.is_authenticated %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <input type="text" name="body" placeholder="Write your message here...">
+    </form>
+</div>
+
+{% endif %}
 
 {% endblock content %}
