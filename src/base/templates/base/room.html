@@ -11,10 +11,10 @@
     <h3>Conversation</h3>
     <hr>
 
-    {% for message in messages %}
+    {% for message in room_messages %}
 
         <div>
-            <small> @{{message.user}} {{message.created}}</small>
+            <small> @{{message.user}} {{message.created|timesince}} ago</small>
         </div>
 
     {% endfor %}

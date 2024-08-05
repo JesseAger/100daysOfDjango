@@ -89,8 +89,8 @@ def createRoom(request):
         form = RoomForm(request.POST)
         for room in Room.objects.all():
 
-            if request.user != room.host:
-                return HttpResponse("You don't have permissions to complete your action")
+            # if request.user != room.host:
+            #     return HttpResponse("You don't have permissions to complete your action")
             if form.is_valid():
                 form.save()
                 return redirect('home')
