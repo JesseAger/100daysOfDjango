@@ -2,37 +2,49 @@
 
 {% block content %}
 
-<h1>{{room.name}}</h1>
 
-<p>{{ room.description}}</p>
+<div class="room-container">
 
-<div class="comment-wrapper">
+    <div>
+    <h1>{{room.name}}</h1>
 
-    <h3>Conversation</h3>
-    <hr>
+    <p>{{ room.description}}</p>
 
-    {% for message in room_messages %}
+    <div class="comment-wrapper">
 
-        <div>
-            <small> @{{message.user}} {{message.created|timesince}} ago</small>
-            <p>{{ message.body }}</p>
+        <h3>Conversation</h3>
+        <hr>
 
-            <hr>
-        </div>
+        {% for message in room_messages %}
 
-    {% endfor %}
+            <div>
+                <small> @{{message.user}} {{message.created|timesince}} ago</small>
+                <p>{{ message.body }}</p>
+
+                <hr>
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+    {% if request.user.is_authenticated %}
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <input type="text" name="body" placeholder="Write your message here...">
+        </form>
+    </div>
+
+    {% endif %}
+    </div>
+    <div>
+        <h3>Participants</h3>
+        <hr>
+    </div>
 
 
 </div>
-{% if request.user.is_authenticated %}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
-
-        <input type="text" name="body" placeholder="Write your message here...">
-    </form>
-</div>
-
-{% endif %}
 
 {% endblock content %}
