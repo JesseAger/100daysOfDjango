@@ -95,7 +95,10 @@ def room(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user':user}
+    rooms = user.room_set.all()
+    room_message=user.message_set.all()
+    topic= topic.objects.all()
+    context = {'user':user, 'rooms':rooms, 'room_message': room_message, 'topic':topic}
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')
@@ -106,8 +109,8 @@ def createRoom(request):
         form = RoomForm(request.POST)
         for room in Room.objects.all():
 
-            # if request.user != room.host:
-            #     return HttpResponse("You don't have permissions to complete your action")
+            if request.user != room.host:
+                return HttpResponse("You don't have permissions to complete your action")
             if form.is_valid():
                 form.save()
                 return redirect('home')
