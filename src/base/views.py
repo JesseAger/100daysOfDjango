@@ -117,6 +117,7 @@ def userProfile(request, pk):
 
 #     context = {'form': form}
 #     return render(request, 'base/room_form.html', context)
+
 @login_required(login_url='login')
 def createRoom(request):
     if request.method == 'POST':
@@ -128,7 +129,6 @@ def createRoom(request):
             return redirect('home')
     else:
         form = RoomForm()
-
     context = {'form': form}
     return render(request, 'base/room_form.html', context)
 
