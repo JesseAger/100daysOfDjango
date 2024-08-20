@@ -36,11 +36,28 @@
 }
 
 .login-btn{
-    padding: 0px 0px 2px 20px;
+    padding: 0px 10px 2px 20px;
+    position: absolute;
+    /* top:50%; */
+    background-color:#0a0a23;
+    color: #fff;
+    border:none; 
+    border-radius:10px; 
+    /* padding:15px; */
+    min-height:30px; 
+    min-width: 120px;
+    text-decoration: none;
+}
+.login-btn a{
+    text-decoration: none;
 }
 .login-btn:hover{
     background-color:#002ead;
     transition: 0.7s;
+}
+
+.btn-container{
+    padding: 0px 0px 20px 20px;
 }
 
 </style>
@@ -72,8 +89,8 @@
     <a href="{% url 'logout' %}">Logout</a>
     {% else %}
     
-<div class="login-btn">
-    <button>
+<div class="btn-container">
+    <button class="login-btn">
         <a href="{% url 'login' %}">Login</a>
     </button>
 </div>
