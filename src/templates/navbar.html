@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,15 +13,12 @@
         justify-items: normal;
         text-decoration: none;
         padding-left: 10px;
+
     }
 
     .study a{
         text-decoration: none;
     }
-
-.search{
-    padding: 2px 0px 20px 20px;
-}
 
 .login-btn{
     padding: 0px 10px 2px 20px;
@@ -35,7 +33,7 @@
     min-width: 120px;
     text-decoration: none;
     right: 5%;
-    top: 15%;
+    top: 5%;
 }
 
 .login-btn a{
@@ -86,7 +84,11 @@
     box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
 }
 
-
+.logo {
+  width: 80px;  /* Adjust width as needed */
+  height: auto;  /* Maintain aspect ratio */
+  margin: 10px;  /* Adjust margin to prevent overlap */
+}
 
 </style>
 
@@ -94,10 +96,7 @@
 <body>
     <div class="study" >
         <a href="/">
-            <h3>
-                LOGO
-            </h3>
-                <h2>StudySync</h2>
+            <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
         </a>
         
     </div>
@@ -112,7 +111,7 @@
     
     {% if request.user.is_authenticated %}
     
-    <h3>Hello {{ request.user }}</h3>
+    <h2>Hello {{ request.user }}</h2>
     
     <a href="{% url 'logout' %}">Logout</a>
     {% else %}
