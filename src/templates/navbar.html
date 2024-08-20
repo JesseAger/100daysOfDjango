@@ -11,9 +11,9 @@
 <style>
 
 .nav-1{
-    background-color: #9394d5;
-    padding-bottom: -2px;
-    margin-bottom: -8px;
+    background-color: slateblue;
+    padding-bottom: 35px;
+    margin-bottom: 5px;
 }
 
 
@@ -28,35 +28,25 @@
         text-decoration: none;
     }
 
-.login-btn{
-    padding: 0px 10px 2px 20px;
-    position: absolute;
-    /* top:50%; */
-    background-color:slateblue;
-    color: #fff;
-    border:none; 
-    border-radius:10px; 
-    /* padding:15px; */
-    min-height:30px; 
-    min-width: 120px;
-    text-decoration: none;
-    right: 5%;
-    top: 5%;
+
+
+.log-user{
+  position: absolute;  
+  top: 30px;            
+  right: 50px;           
+
 }
 
-.login-btn a{
-    text-decoration: none;
-    font-family: sans-serif;
-    font-weight: 500;
-}
+.log-user a {
+      color: #cccccc; 
+      font-size: 20px; 
+      font-weight: bold; 
+      text-decoration: none; 
+      padding: 5px; 
+    }
 
-.login-btn a text{
-    font-family: sans-serif;
-    font-weight: 500;
-}
-
-.login-btn:hover{
-    background-color:#002ead;
+.log-user a:hover{
+    color:#ffffff;
     transition: 0.7s;
 }
 
@@ -68,8 +58,6 @@
 
 .search-container {
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
     margin: 20px;
     padding-top: 4px;
     margin-bottom: -20px;
@@ -81,8 +69,8 @@
 }
 
 .search-input {
-    width: 100%;
-    max-width: 400px;
+    width: 150%;
+    max-width: 600px;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 25px;
@@ -90,19 +78,28 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     outline: none;
     transition: all 0.3s ease;
-    margin-top: -30px;
+    margin-top: -25px;
     position: relative;
-    top: -20px;
+    top: -10px;
+    background-color: #dddddd;
+    text-align: center;
 
 } 
 
+.search-input::placeholder {
+  font-style: italic;     
+  color: #888;            
+}
+
+
 .search-input:focus {
     border-color: #007bff;
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(7, 9, 18, 0.841);
+
 }
 
 .logo {
-  width: 80px;  
+  width: 70px;  
   height: auto;  
   margin: 10px;  
 }
@@ -129,7 +126,7 @@
         <div class="search-container">
         
         <form method="GET" action="{% url 'home' %}">
-            <input type="text" class="search-input"  name="q" placeholder="Search Rooms"/>
+            <input type="text" class="search-input"  name="q" placeholder= "Search Rooms"/>
         
         </form>
         </div>
@@ -141,13 +138,12 @@
         <a href="{% url 'logout' %}">Logout</a>
         {% else %}
         
-        <div class="btn-container">
-        <button class="login-btn" onclick="">
+        <div class="log-user">
             <a href="{% url 'login' %}">Login</a>
-        </button>
         </div>
+
         {% endif %}
-        <hr>
+       
     </div>
 </body>
 </html>
