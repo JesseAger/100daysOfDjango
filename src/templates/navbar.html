@@ -9,12 +9,20 @@
 
 
 <style>
-    .study{
-        justify-items: normal;
-        text-decoration: none;
-        padding-left: 10px;
 
-    }
+.nav-1{
+    background-color: #9394d5;
+    padding-bottom: -2px;
+    margin-bottom: -8px;
+}
+
+
+.study{
+    justify-items: normal;
+    text-decoration: none;
+    padding-left: 10px;
+
+}
 
     .study a{
         text-decoration: none;
@@ -60,10 +68,16 @@
 
 .search-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     margin: 20px;
-    top: 15%;
+    padding-top: 4px;
+    margin-bottom: -20px;
+    bottom: 90%;
+    padding-left: 15%;
+    padding-top: -15%;
+    margin-top: -4%;
+    margin-left: 25%;
 }
 
 .search-input {
@@ -76,8 +90,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     outline: none;
     transition: all 0.3s ease;
-    top: 15%;
-}
+    margin-top: -30px;
+    position: relative;
+    top: -20px;
+
+} 
 
 .search-input:focus {
     border-color: #007bff;
@@ -85,46 +102,53 @@
 }
 
 .logo {
-  width: 80px;  /* Adjust width as needed */
-  height: auto;  /* Maintain aspect ratio */
-  margin: 10px;  /* Adjust margin to prevent overlap */
+  width: 80px;  
+  height: auto;  
+  margin: 10px;  
 }
+
+@media (max-width: 768px) {
+  .logo {
+    width: 100px;  
+  }
+}
+
 
 </style>
 
 
 <body>
-    <div class="study" >
-        <a href="/">
-            <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
-        </a>
+    <div class="nav-1">
+        <div class="study" >
+            <a href="/">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+            </a>
         
+        </div>
+        
+        <div class="search-container">
+        
+        <form method="GET" action="{% url 'home' %}">
+            <input type="text" class="search-input"  name="q" placeholder="Search Rooms"/>
+        
+        </form>
+        </div>
+        
+        {% if request.user.is_authenticated %}
+        
+        <h2>Hello {{ request.user }}</h2>
+        
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        
+        <div class="btn-container">
+        <button class="login-btn" onclick="">
+            <a href="{% url 'login' %}">Login</a>
+        </button>
+        </div>
+        {% endif %}
+        <hr>
     </div>
-
-<div class="search-container">
-    
-    <form method="GET" action="{% url 'home' %}">
-        <input type="text" class="search-input"  name="q" placeholder="Search Rooms"/>
-    
-    </form>
-</div>
-    
-    {% if request.user.is_authenticated %}
-    
-    <h2>Hello {{ request.user }}</h2>
-    
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    
-<div class="btn-container">
-    <button class="login-btn">
-        <a href="{% url 'login' %}">Login</a>
-    </button>
-</div>
-
-    {% endif %}
-    
-    <hr> 
 </body>
 </html>
 

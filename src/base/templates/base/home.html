@@ -32,6 +32,14 @@ h5 {
     -webkit-text-fill-color: transparent;
 }
 
+.available{
+    margin-left: 40%;
+    background-color: #9394d5;
+}
+
+.rooms{
+    background: fixed;
+}
 
 
 </style>
@@ -44,8 +52,8 @@ h5 {
     </div>
 
 
-    <div>
-        <h5>{{ room_count }} rooms available</h5>
+    <div class="rooms">
+        <h5 class="available">{{ room_count }} rooms available</h5>
         <a href="{% url 'create-room' %}">Create Room</a>
 
         <div>
