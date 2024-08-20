@@ -1,22 +1,88 @@
-<a href="/">
-    <h1>
-        LOGO
-    </h1>
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search Rooms"/>
 
-</form>
+<style>
+    .study{
+        justify-items: normal;
+        text-decoration: none;
+        padding-left: 10px;
+    }
 
-{% if request.user.is_authenticated %}
+    .study a{
+        text-decoration: none;
+    }
 
-<h3>Hello {{ request.user }}</h3>
+    .button {
+    position: absolute;
+    top:50%;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none; 
+    border-radius:10px; 
+    padding:15px;
+    min-height:30px; 
+    min-width: 120px;
+  }
 
-<a href="{% url 'logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a>
 
-{% endif %}
+.search{
+    padding: 2px 0px 10px 20px;
+}
 
-<hr>
+.login-btn{
+    padding: 0px 0px 2px 20px;
+}
+.login-btn:hover{
+    background-color:#002ead;
+    transition: 0.7s;
+}
+
+</style>
+
+
+<body>
+    <div class="study" >
+        <a href="/">
+            <h1>
+                LOGO
+            </h1>
+                <h1>StudySync</h1>
+        </a>
+        
+    </div>
+
+<div class="search">
+    
+    <form method="GET" action="{% url 'home' %}">
+        <input type="text" name="q" placeholder="Search Rooms"/>
+    
+    </form>
+</div>
+    
+    {% if request.user.is_authenticated %}
+    
+    <h3>Hello {{ request.user }}</h3>
+    
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    
+<div class="login-btn">
+    <button>
+        <a href="{% url 'login' %}">Login</a>
+    </button>
+</div>
+
+    {% endif %}
+    
+    <hr> 
+</body>
+</html>
+
+
+

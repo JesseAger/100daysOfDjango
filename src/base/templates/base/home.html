@@ -7,14 +7,65 @@
     .home-container{
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
+        
     }
+    body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to right, #f5f5f5, #ffffff);
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 3em;
+    background: linear-gradient(to right, #a2c2e2, #ffffff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h5 {
+    font-size: 1.5em;
+    background: linear-gradient(to right, #f8b195, #f67280);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@font-face {
+  font-family: web-font;
+  src: url("https://example.com/font.woff");
+}
+
+@font-face {
+  font-family: local-font;
+  src: local(Local Font);
+  ascent-override: 125%;
+}
+
+.topics{
+    padding-left: 10px;
+}
+
+.topics a{
+    text-decoration: none;
+    font-family: web-font;
+    font-weight: 800;
+
+}
+
+.topics a:hover{
+    color:#acc2cf;
+    transition: 0.7s;
+}
+
+
 </style>
 
-<h1>Home</h1>
 
 <div class="home-container">
 
-    <div>
+    <div class="topics">
         {% include 'base/topic_component.html' %}
     </div>
 
