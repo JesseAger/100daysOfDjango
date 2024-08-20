@@ -18,28 +18,15 @@
         text-decoration: none;
     }
 
-    .button {
-    position: absolute;
-    top:50%;
-    background-color:#0a0a23;
-    color: #fff;
-    border:none; 
-    border-radius:10px; 
-    padding:15px;
-    min-height:30px; 
-    min-width: 120px;
-  }
-
-
 .search{
-    padding: 2px 0px 10px 20px;
+    padding: 2px 0px 20px 20px;
 }
 
 .login-btn{
     padding: 0px 10px 2px 20px;
     position: absolute;
     /* top:50%; */
-    background-color:#0a0a23;
+    background-color:slateblue;
     color: #fff;
     border:none; 
     border-radius:10px; 
@@ -48,17 +35,55 @@
     min-width: 120px;
     text-decoration: none;
 }
+
 .login-btn a{
     text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 500;
 }
+
+.login-btn a text{
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
 .login-btn:hover{
     background-color:#002ead;
     transition: 0.7s;
 }
 
 .btn-container{
-    padding: 0px 0px 20px 20px;
+    padding: 0px 0px 40px 20px;
+    justify-content: right;
+    align-items: flex-end;
 }
+
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+
 
 </style>
 
@@ -74,10 +99,10 @@
         
     </div>
 
-<div class="search">
+<div class="search-container">
     
     <form method="GET" action="{% url 'home' %}">
-        <input type="text" name="q" placeholder="Search Rooms"/>
+        <input type="text" class="search-input"  name="q" placeholder="Search Rooms"/>
     
     </form>
 </div>
