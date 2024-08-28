@@ -77,14 +77,26 @@
     transition: 0.7s;
 }
 
+
+.resources a {
+      color: #cccccc; 
+      font-size: 20px; 
+      font-weight: bold; 
+      text-decoration: none; 
+      padding: 5px; 
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+.resources a:hover{
+    color:#ffffff;
+    transition: 0.7s;
+}
+
+
 .btn-container{
     padding: 0px 0px 40px 20px;
     left: 5%;
 }
-
-
-
-
 
 .search-container {
     display: flex;
@@ -169,7 +181,10 @@
         
         <a href="{% url 'logout' %}">Logout</a>
         {% else %}
-        
+        <div class="resources">
+            <a href="{% url 'resources' %}">Resources</a>
+        </div>
+
         <div class="log-user">
             <a href="{% url 'login' %}">Login</a>
         </div>
