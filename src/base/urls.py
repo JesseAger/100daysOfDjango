@@ -16,6 +16,6 @@ path('update-room/<str:pk>/', views.updateRoom, name="update-room"),
 path('delete-room/<str:pk>/', views.deleteRoom, name="delete-room"),
 path('delete-message/<str:pk>/', views.deleteMessage, name="delete-message"),
 
-path('our-resources/<str:pk>/', views.Resources, name="resources"),
+path('our-resources/', views.Resources, name="resources"),
 
 ]
